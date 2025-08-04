@@ -1,6 +1,5 @@
 import type { Book } from './types';
 import { generateFractionalCount } from './rng';
-import { generateFakeIsbn } from './isbn';
 import { generateReview } from './reviewGenerator';
 import { getFaker } from './locales';
 
@@ -13,10 +12,10 @@ export const generateBook = (
 ): Book => {
   const fakerInstance = getFaker(locale);
 
-  const isbn = generateFakeIsbn(rng);
-  const title = fakerInstance.commerce.productName();
-  const authors = [fakerInstance.person.fullName()];
-  const publisher = fakerInstance.company.name();
+  const isbn = fakerInstance.commerce.isbn();
+  const title = fakerInstance.book.title();
+  const authors = [fakerInstance.book.author()];
+  const publisher = fakerInstance.book.publisher();
 
   const likes = generateFractionalCount(rng, avgLikes);
   const reviewsCount = generateFractionalCount(rng, avgReviews);
