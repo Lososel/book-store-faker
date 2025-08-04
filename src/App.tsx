@@ -1,13 +1,8 @@
 import './App.css';
+import { BookStorePage } from './pages/Main';
 
 function App() {
-  return (
-    <>
-      <div>
-        <h1>Book Store Faker</h1>
-      </div>
-    </>
-  );
+  return <BookStorePage />;
 }
 
 export default App;

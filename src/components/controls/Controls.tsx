@@ -30,7 +30,7 @@ export const Controls = ({
     <Box display="flex" flexWrap="wrap" gap={3} mb={3}>
       <TextField label="Seed" value={seed} onChange={e => onSeedChange(e.target.value)} />
       <Button variant="outlined" onClick={onRandomSeed}>
-        🔀 Random
+        Random
       </Button>
 
       <TextField
