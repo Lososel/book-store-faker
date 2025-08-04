@@ -1,6 +1,14 @@
 import type { Book } from '../../utils/types';
 import { BookRow } from './BookRow';
-import './BookTable.css';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from '@mui/material';
 
 interface BookTableProps {
   books: Book[];
@@ -8,23 +16,25 @@ interface BookTableProps {
 
 export const BookTable = ({ books }: BookTableProps) => {
   return (
-    <table className="book-table">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>ISBN</th>
-          <th>Title</th>
-          <th>Author(s)</th>
-          <th>Publisher</th>
-          <th>Likes</th>
-          <th>Reviews</th>
-        </tr>
-      </thead>
-      <tbody>
-        {books.map(book => (
-          <BookRow key={book.index} book={book} />
-        ))}
-      </tbody>
-    </table>
+    <TableContainer component={Paper}>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>#</TableCell>
+            <TableCell>ISBN</TableCell>
+            <TableCell>Title</TableCell>
+            <TableCell>Author(s)</TableCell>
+            <TableCell>Publisher</TableCell>
+            <TableCell>Likes</TableCell>
+            <TableCell>Reviews</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {books.map(book => (
+            <BookRow key={book.index} book={book} />
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 };

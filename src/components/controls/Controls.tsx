@@ -1,0 +1,69 @@
+import { Box, TextField, Button, MenuItem, Slider, Typography } from '@mui/material';
+
+interface ControlsProps {
+  seed: string;
+  onSeedChange: (seed: string) => void;
+  onRandomSeed: () => void;
+
+  locale: string;
+  onLocaleChange: (locale: string) => void;
+
+  avgLikes: number;
+  onAvgLikesChange: (value: number) => void;
+
+  avgReviews: number;
+  onAvgReviewsChange: (value: number) => void;
+}
+
+export const Controls = ({
+  seed,
+  onSeedChange,
+  onRandomSeed,
+  locale,
+  onLocaleChange,
+  avgLikes,
+  onAvgLikesChange,
+  avgReviews,
+  onAvgReviewsChange,
+}: ControlsProps) => {
+  return (
+    <Box display="flex" flexWrap="wrap" gap={3} mb={3}>
+      <TextField label="Seed" value={seed} onChange={e => onSeedChange(e.target.value)} />
+      <Button variant="outlined" onClick={onRandomSeed}>
+        🔀 Random
+      </Button>
+
+      <TextField
+        select
+        label="Locale"
+        value={locale}
+        onChange={e => onLocaleChange(e.target.value)}
+        style={{ minWidth: 150 }}
+      >
+        <MenuItem value="en">English (US)</MenuItem>
+        <MenuItem value="fr">Français (FR)</MenuItem>
+        <MenuItem value="ja">日本語 (JP)</MenuItem>
+      </TextField>
+
+      <Box>
+        <Typography>Avg Likes: {avgLikes.toFixed(1)}</Typography>
+        <Slider
+          min={0}
+          max={10}
+          step={0.1}
+          value={avgLikes}
+          onChange={(_, value) => onAvgLikesChange(value as number)}
+          style={{ width: 150 }}
+        />
+      </Box>
+
+      <TextField
+        label="Avg Reviews"
+        type="number"
+        value={avgReviews}
+        inputProps={{ step: 0.1, min: 0, max: 10 }}
+        onChange={e => onAvgReviewsChange(parseFloat(e.target.value))}
+      />
+    </Box>
+  );
+};
