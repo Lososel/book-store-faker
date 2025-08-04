@@ -13,9 +13,14 @@ export const generateBook = (
   const fakerInstance = getFaker(locale);
 
   const isbn = fakerInstance.commerce.isbn();
-  const title = fakerInstance.book.title();
-  const authors = [fakerInstance.book.author()];
-  const publisher = fakerInstance.book.publisher();
+  const title = fakerInstance.word
+    .words({ count: { min: 2, max: 4 } })
+    .split(' ')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+
+  const authors = [fakerInstance.person.fullName()];
+  const publisher = fakerInstance.company.name();
 
   const likes = generateFractionalCount(rng, avgLikes);
   const reviewsCount = generateFractionalCount(rng, avgReviews);
