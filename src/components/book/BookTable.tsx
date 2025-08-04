@@ -20,13 +20,12 @@ export const BookTable = ({ books }: BookTableProps) => {
       <Table>
         <TableHead>
           <TableRow>
+            <TableCell> </TableCell>
             <TableCell>#</TableCell>
             <TableCell>ISBN</TableCell>
             <TableCell>Title</TableCell>
             <TableCell>Author(s)</TableCell>
             <TableCell>Publisher</TableCell>
-            <TableCell>Likes</TableCell>
-            <TableCell>Reviews</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
