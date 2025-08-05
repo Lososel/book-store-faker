@@ -1,4 +1,13 @@
-import { Box, TextField, Button, MenuItem, Slider, Typography } from '@mui/material';
+import {
+  Box,
+  TextField,
+  MenuItem,
+  Slider,
+  Typography,
+  InputAdornment,
+  IconButton,
+} from '@mui/material';
+import ShuffleRoundedIcon from '@mui/icons-material/ShuffleRounded';
 
 interface ControlsProps {
   seed: string;
@@ -28,11 +37,23 @@ export const Controls = ({
 }: ControlsProps) => {
   return (
     <Box display="flex" flexWrap="wrap" gap={3} mb={3}>
-      <TextField label="Seed" value={seed} onChange={e => onSeedChange(e.target.value)} />
-      <Button variant="outlined" onClick={onRandomSeed}>
-        Random
-      </Button>
-
+      <TextField
+        label="Seed"
+        value={seed}
+        onChange={e => onSeedChange(e.target.value)}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton>
+                <ShuffleRoundedIcon
+                  titleAccess="Random seed"
+                  onClick={onRandomSeed}
+                ></ShuffleRoundedIcon>
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
+      ></TextField>
       <TextField
         select
         label="Locale"
