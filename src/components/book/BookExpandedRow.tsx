@@ -32,15 +32,39 @@ export const BookExpandedRow = ({ book }: BookExpandedRowProps) => {
           >
             {book.title}
           </Typography>
+          <Typography variant="caption" color="text.primary">
+            {book.authors.join(', ')}
+          </Typography>
           <Typography variant="caption" color="text.secondary">
-            {book.authors[0]}
+            {book.publisher}
           </Typography>
         </Box>
         <Typography variant="subtitle2">Reviews:</Typography>
         <List dense>
           {book.reviews.map((r, i) => (
-            <ListItem key={i}>
-              <em>{r.author}:</em>&nbsp;{r.text}
+            <ListItem
+              key={i}
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'flex-start',
+                paddingY: 0.5,
+              }}
+            >
+              <Typography variant="subtitle2" sx={{ fontWeight: 'bold', fontSize: 13 }}>
+                {r.author}
+              </Typography>
+              <Typography
+                variant="body2"
+                sx={{
+                  fontStyle: 'italic',
+                  fontSize: 13,
+                  color: 'text.secondary',
+                  paddingLeft: 1,
+                }}
+              >
+                - {r.text}
+              </Typography>
             </ListItem>
           ))}
         </List>

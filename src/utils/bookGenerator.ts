@@ -21,7 +21,8 @@ export const generateBook = (
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ');
 
-  const authors = [fakerInstance.person.fullName()];
+  const authorCount = 1 + Math.floor(rng() * 3);
+  const authors = Array.from({ length: authorCount }, () => fakerInstance.person.fullName());
   const year = fakerInstance.date.birthdate({ mode: 'year', min: 1980, max: 2025 }).getFullYear();
   const publisher = `${fakerInstance.company.name()}, ${year}`;
 

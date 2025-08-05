@@ -42,7 +42,7 @@ export const BookRow = ({ book }: BookRowProps) => {
           </IconButton>
         </TableCell>
         <TableCell>{book.index}</TableCell>
-        <TableCell>{book.isbn}</TableCell>
+        <TableCell width="130px">{book.isbn}</TableCell>
         <TableCell>{book.title}</TableCell>
         <TableCell>{book.authors.join(', ')}</TableCell>
         <TableCell>{book.publisher}</TableCell>
