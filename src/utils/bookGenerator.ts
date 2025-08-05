@@ -22,7 +22,8 @@ export const generateBook = (
     .join(' ');
 
   const authors = [fakerInstance.person.fullName()];
-  const publisher = fakerInstance.company.name();
+  const year = fakerInstance.date.birthdate({ mode: 'year', min: 1980, max: 2025 }).getFullYear();
+  const publisher = `${fakerInstance.company.name()}, ${year}`;
 
   const likes = generateFractionalCount(rng, avgLikes);
   const reviewsCount = generateFractionalCount(rng, avgReviews);
