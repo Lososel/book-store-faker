@@ -1,8 +1,9 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { Controls } from '../components/controls/Controls';
 import { BookTable } from '../components/book/BookTable';
 import { generateBooksBatch } from '../utils/bookBatch';
 import type { Book } from '../utils/types';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 const INITIAL_BATCH_SIZE = 20;
 const NEXT_BATCH_SIZE = 10;
@@ -15,6 +16,8 @@ export const BookStorePage = () => {
 
   const [books, setBooks] = useState<Book[]>([]);
   const [page, setPage] = useState(0);
+  const [hasMore, setHasMore] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const initialBatch = generateBooksBatch(
@@ -27,9 +30,13 @@ export const BookStorePage = () => {
     );
     setBooks(initialBatch);
     setPage(0);
+    setHasMore(true);
   }, [seed, locale, avgLikes, avgReviews]);
 
-  const loadNextBatch = useCallback(() => {
+  const loadNextBatch = () => {
+    if (isLoading) return;
+    setIsLoading(true);
+
     const nextPage = page + 1;
     const nextBatch = generateBooksBatch(
       seed,
@@ -39,19 +46,17 @@ export const BookStorePage = () => {
       avgReviews,
       locale
     );
+
+    if (nextBatch.length === 0) {
+      setHasMore(false);
+      setIsLoading(false);
+      return;
+    }
+
     setBooks(prev => [...prev, ...nextBatch]);
     setPage(nextPage);
-  }, [page, seed, locale, avgLikes, avgReviews]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 200) {
-        loadNextBatch();
-      }
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [loadNextBatch]);
+    setIsLoading(false);
+  };
 
   const handleRandomSeed = () => {
     setSeed(Math.floor(Math.random() * 1_000_000).toString());
@@ -71,7 +76,15 @@ export const BookStorePage = () => {
         onAvgReviewsChange={setAvgReviews}
       />
 
-      <BookTable books={books} />
+      <InfiniteScroll
+        dataLength={books.length}
+        next={loadNextBatch}
+        hasMore={hasMore}
+        loader={<></>}
+        endMessage={<p style={{ textAlign: 'center' }}>No more books</p>}
+      >
+        <BookTable books={books} />
+      </InfiniteScroll>
     </div>
   );
 };
