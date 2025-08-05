@@ -16,7 +16,11 @@ interface BookTableProps {
 
 export const BookTable = ({ books }: BookTableProps) => {
   return (
-    <TableContainer component={Paper} sx={{ maxHeight: '700px' }}>
+    <TableContainer
+      id="scrollableDiv"
+      component={Paper}
+      sx={{ maxHeight: '700px', overflow: 'auto' }}
+    >
       <Table stickyHeader>
         <TableHead>
           <TableRow>

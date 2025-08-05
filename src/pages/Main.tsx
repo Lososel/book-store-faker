@@ -81,7 +81,8 @@ export const BookStorePage = () => {
         next={loadNextBatch}
         hasMore={hasMore}
         loader={<></>}
-        endMessage={<p style={{ textAlign: 'center' }}>No more books</p>}
+        scrollableTarget="scrollableDiv"
+        scrollThreshold={1}
       >
         <BookTable books={books} />
       </InfiniteScroll>
