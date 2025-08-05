@@ -74,6 +74,7 @@ export const BookStorePage = () => {
         onAvgLikesChange={setAvgLikes}
         avgReviews={avgReviews}
         onAvgReviewsChange={setAvgReviews}
+        books={books}
       />
 
       <InfiniteScroll

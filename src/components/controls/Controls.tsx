@@ -8,6 +8,9 @@ import {
   IconButton,
 } from '@mui/material';
 import ShuffleRoundedIcon from '@mui/icons-material/ShuffleRounded';
+import DownloadForOfflineIcon from '@mui/icons-material/DownloadForOffline';
+import { exportBooksToCsv } from '../../utils/exportCSV';
+import type { Book } from '../../utils/types';
 
 interface ControlsProps {
   seed: string;
@@ -22,6 +25,8 @@ interface ControlsProps {
 
   avgReviews: number;
   onAvgReviewsChange: (value: number) => void;
+
+  books: Book[];
 }
 
 export const Controls = ({
@@ -34,6 +39,7 @@ export const Controls = ({
   onAvgLikesChange,
   avgReviews,
   onAvgReviewsChange,
+  books,
 }: ControlsProps) => {
   return (
     <Box display="flex" flexWrap="wrap" gap={3} mb={3}>
@@ -85,6 +91,12 @@ export const Controls = ({
         inputProps={{ step: 0.1, min: 0, max: 10 }}
         onChange={e => onAvgReviewsChange(parseFloat(e.target.value))}
       />
+      <IconButton>
+        <DownloadForOfflineIcon
+          titleAccess="Download CSV"
+          onClick={() => exportBooksToCsv(books)}
+        ></DownloadForOfflineIcon>
+      </IconButton>
     </Box>
   );
 };
