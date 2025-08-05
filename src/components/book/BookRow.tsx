@@ -1,17 +1,9 @@
 import { useState } from 'react';
 import type { Book } from '../../utils/types';
-import {
-  TableRow,
-  TableCell,
-  Collapse,
-  Box,
-  Typography,
-  List,
-  ListItem,
-  IconButton,
-} from '@mui/material';
+import { TableRow, TableCell, Collapse, IconButton } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { BookExpandedRow } from './BookExpandedRow.tsx';
 
 interface BookRowProps {
   book: Book;
@@ -58,16 +50,7 @@ export const BookRow = ({ book }: BookRowProps) => {
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={7}>
           <Collapse in={expanded} timeout="auto" unmountOnExit>
-            <Box margin={1}>
-              <Typography variant="subtitle2">Reviews:</Typography>
-              <List dense>
-                {book.reviews.map((r, i) => (
-                  <ListItem key={i}>
-                    <em>{r.author}:</em>&nbsp;{r.text}
-                  </ListItem>
-                ))}
-              </List>
-            </Box>
+            <BookExpandedRow book={book} />
           </Collapse>
         </TableCell>
       </TableRow>
