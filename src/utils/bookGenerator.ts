@@ -26,8 +26,8 @@ export const generateBook = (
 
   const likes = generateFractionalCount(rng, avgLikes);
   const reviewsCount = generateFractionalCount(rng, avgReviews);
-  const reviews = Array.from({ length: reviewsCount }, () =>
-    generateReview(rng, locale, recordSeed)
+  const reviews = Array.from({ length: reviewsCount }, (_, reviewIndex) =>
+    generateReview(rng, locale, recordSeed, reviewIndex)
   );
 
   return { index, isbn, title, authors, publisher, likes, reviews };
