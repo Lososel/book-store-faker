@@ -11,7 +11,14 @@ export const generateBooksBatch = (
   locale: string
 ): Book[] => {
   const rng = createSeededRng(seed, page);
+  const numericSeed =
+    typeof seed === 'number'
+      ? seed
+      : seed
+          .toString()
+          .split('')
+          .reduce((acc, ch) => acc + ch.charCodeAt(0), 0);
   return Array.from({ length: batchSize }, (_, i) =>
-    generateBook(i + 1 + page * batchSize, rng, avgLikes, avgReviews, locale)
+    generateBook(i + 1 + page * batchSize, rng, avgLikes, avgReviews, locale, numericSeed)
   );
 };

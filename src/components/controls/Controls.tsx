@@ -63,7 +63,7 @@ export const Controls = ({
       >
         <MenuItem value="en">English (US)</MenuItem>
         <MenuItem value="fr">Français (FR)</MenuItem>
-        <MenuItem value="ja">日本語 (JP)</MenuItem>
+        <MenuItem value="de">Deutsch (DE)</MenuItem>
       </TextField>
 
       <Box>

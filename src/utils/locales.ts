@@ -1,15 +1,21 @@
-import { fakerEN, fakerFR, fakerDE } from '@faker-js/faker';
+import { Faker, en, fr, de } from '@faker-js/faker';
 
-export const localeMap: Record<string, typeof fakerEN> = {
-  en: fakerEN,
-  fr: fakerFR,
-  ja: fakerDE,
+export const getFaker = (locale: string, seed?: number) => {
+  let locales;
+  switch (locale) {
+    case 'fr':
+      locales = [fr];
+      break;
+    case 'de':
+      locales = [de];
+      break;
+    default:
+      locales = [en];
+  }
+
+  const fakerInstance = new Faker({ locale: locales });
+  if (seed !== undefined) {
+    fakerInstance.seed(seed);
+  }
+  return fakerInstance;
 };
-
-export const getFaker = (locale: string) => localeMap[locale] || fakerEN;
-
-export const supportedLocales = [
-  { code: 'en', label: 'English (USA)' },
-  { code: 'fr', label: 'Français (France)' },
-  { code: 'de', label: 'Deutsch (Germany)' },
-];

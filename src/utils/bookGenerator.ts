@@ -8,9 +8,11 @@ export const generateBook = (
   rng: () => number,
   avgLikes: number,
   avgReviews: number,
-  locale: string = 'en'
+  locale: string = 'en',
+  baseSeed: number
 ): Book => {
-  const fakerInstance = getFaker(locale);
+  const recordSeed = baseSeed + index;
+  const fakerInstance = getFaker(locale, recordSeed);
 
   const isbn = fakerInstance.commerce.isbn();
   const title = fakerInstance.word
@@ -24,7 +26,9 @@ export const generateBook = (
 
   const likes = generateFractionalCount(rng, avgLikes);
   const reviewsCount = generateFractionalCount(rng, avgReviews);
-  const reviews = Array.from({ length: reviewsCount }, () => generateReview(rng, locale));
+  const reviews = Array.from({ length: reviewsCount }, () =>
+    generateReview(rng, locale, recordSeed)
+  );
 
   return { index, isbn, title, authors, publisher, likes, reviews };
 };
