@@ -16,8 +16,8 @@ interface BookTableProps {
 
 export const BookTable = ({ books }: BookTableProps) => {
   return (
-    <TableContainer component={Paper}>
-      <Table>
+    <TableContainer component={Paper} sx={{ maxHeight: '700px' }}>
+      <Table stickyHeader>
         <TableHead>
           <TableRow>
             <TableCell> </TableCell>
